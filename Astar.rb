@@ -1,5 +1,4 @@
 class Astar
-
 	
 	attr_accessor :openList
 	attr_accessor :closedList
@@ -17,7 +16,7 @@ class Astar
 	
 	end			
 	
-	def findPath(st, ed, wall)
+	def find_path(st, ed, wall) #what is st or end
 		s_i = st[0]
 		s_j = st[1]
 
@@ -37,8 +36,9 @@ class Astar
 		print " #{@array} \n "
 		@openList[[s_i,s_j]] = [0, 0, 0, nil, nil]
 		extractList(s_i, s_j, e_i, e_j)
-		$list=extractPath( e_i,e_j, s_i, s_j)
-		print [e_i, e_j] << $list 
+		list = []
+		extractPath( e_i,e_j, s_i, s_j,list)
+		print [e_i, e_j] << list #would this be correct or should it be list=extractPath 
 	end
 	
 
@@ -112,18 +112,18 @@ class Astar
 		hash= [f, g, h, p_i, p_j]	
 	end
 	$list=[]
-	def extractPath(cell_i, cell_j, s_i, s_j)
+	def extractPath(cell_i, cell_j, s_i, s_j, list) #DONT use instance variable $list
 		until cell_i == s_i && cell_j == s_j
 			parent_values= @closedList[[cell_i, cell_j]]
 			cell_i = parent_values[3]
 			cell_j = parent_values[4]	
-			$list =  $list << [cell_i, cell_j]
+			list << [cell_i, cell_j]
 			
 			extractPath(cell_i, cell_j, s_i, s_j)
 			cell_i = s_i
 			cell_j = s_j
 		end
-		return $list
+		list #what happens if Ruby is pass by value, what about pass by reference
 		#puts "list after call is : #{$list} "
 	end
 	
