@@ -118,7 +118,6 @@ class Astar
 			cell_i = parent_values[3]
 			cell_j = parent_values[4]	
 			list << [cell_i, cell_j]
-			
 			extract_path(cell_i, cell_j, start_i, start_j, list)
 			cell_i = start_i
 			cell_j = start_j
